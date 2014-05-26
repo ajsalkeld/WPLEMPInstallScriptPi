@@ -1,0 +1,22 @@
+# This is the nginx virtual host config file.
+# There is no need for you to meddle until after install!
+
+server {
+  listen 80 default_server;
+  root /var/www/wordpress/;
+  index index.php;
+  # unless the request is for a valid file, send to bootstrap
+  if (!-e $request_filename) {
+    rewrite ^(.+)$ /index.php?q=$1 last;
+  }
+  location / {
+    index index.php;
+  }
+  location ~ \.php(/|$) {
+    fastcgi_pass 127.0.0.1:9000;
+    fastcgi_split_path_info ^(.+\.php)(/.*)$;
+    include fastcgi_params;
+    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    fastcgi_param HTTPS off;
+  }
+}
