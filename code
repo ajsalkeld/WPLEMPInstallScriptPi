@@ -27,7 +27,7 @@ apt-get install -f -y --force-yes nginx php5 php5-fpm mysql-server-5.5 mysql-cli
 
 # *Nginx Config*
 echo "Setting up Nginx..."
-rm /etc/nginx/sites-enabled/* # Remove potentially conflicting virtual hosts (*\)
+rm /etc/nginx/sites-enabled/* # Remove potentially conflicting virtual hosts (*/)
 mv wordpress /etc/nginx/sites-available/wordpress # Add ours
 ln -s /etc/nginx/sites-available/wordpress /etc/nginx/sites-enabled/wordpress # Enable it
 
