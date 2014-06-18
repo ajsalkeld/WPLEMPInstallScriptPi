@@ -2,7 +2,7 @@
 #
 # Wordpress & LEMP auto-installer for Linux Debian/Ubuntu/Raspbian
 #
-# Made by AJ Salkeld for The Pi Club
+# Made by AJ Salkeld for Lanky Nerd Studios and Club Piduino
 #
 # © AJ Salkeld, 2014
 #
@@ -22,8 +22,8 @@
 # Run this software at YOUR OWN RISK!
 #
 # ******************************************************************************************* #
-# *                                          V 1.0.0                                        * #
-# *                                26 April 2014 - By AJ Salkeld                            * #
+# *                                          V 1.0.1                                        * #
+# *                                18 June 2014 - By AJ Salkeld                             * #
 # ******************************************************************************************* #
 #
 # TODO: - Add automatic wp-config.php creation (Due V 1.1.0)
@@ -35,7 +35,7 @@ echo "Running..."
 # *Query User*
 echo -n "Enter desired new MySQL username for Wordpress database (MUST BE NEW), and press [ENTER]:" 
 read sqlUser # Variable for MySQL username
-echo -n "Enter desired password for $sqlUser (MySQL user for Wordpress), and press [ENTER]:"
+echo -n "Enter desired password for '$sqlUser' (MySQL user for Wordpress), and press [ENTER]:"
 read sqlPasswd # Variable for MySQL user's password
 
 # *Prep*
@@ -49,12 +49,13 @@ apt-get install -f -y --force-yes nginx php5 php5-fpm mysql-server-5.5 mysql-cli
 
 # *Nginx Config*
 echo "Setting up Nginx..."
-rm /etc/nginx/sites-enabled/* # Remove potentially conflicting virtual hosts
+mkdir /etc/nginx/oldfiles
+mv /etc/nginx/sites-enabled/* /etc/nginx/oldfiles # Remove potentially conflicting virtual hosts
 mv wordpress /etc/nginx/sites-available/wordpress # Add ours
 ln -s /etc/nginx/sites-available/wordpress /etc/nginx/sites-enabled/wordpress # Enable it
 
 # *Wordpress*
-mkdir /var/www # JIC
+mkdir /var/www # JIC it is not present
 cd /var/www # Go to www directory
 echo "Downloading"
 wget http://wordpress.org/latest.zip # Download latest WP stable build
@@ -80,5 +81,6 @@ echo "Now point your browser at the server and follow the Wordpress installation
 echo "The MySQL database is 'wordpress', the user is '$sqlUser' and the password is '$sqlPasswd', as you set earlier."
 echo "If all goes well, you now have a Wordpress blog."
 echo "That's all folks!"
+
 
 # *END*
