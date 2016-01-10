@@ -3,11 +3,11 @@ Auto WP LEMP Installer
 
 This script automatically installs Wordpress, Nginx, MySQL and PHP on Debian/Ubuntu/Raspbian OS-based devices.
 
+** No longer in development. Probably still works though. **
+
 
 Instructions
 ============
-
-For better instructions, visit <a href="http://thepi.club/2014/05/auto-install-wordpress-pi/">here.</a>
 
 Download the auto-installer with
 
